@@ -13,6 +13,13 @@ when 'bionic'
     components ['main']
     key 'https://couchdb.apache.org/repo/bintray-pubkey.asc'
   end
+when 'focal'
+  apt_repository 'couchdb' do
+    uri 'https://apache.bintray.com/couchdb-deb'
+    distribution 'focal'
+    components ['main']
+    key 'https://couchdb.apache.org/repo/bintray-pubkey.asc'
+  end
 end
 
 package 'couchdb'
@@ -25,7 +32,7 @@ when 'trusty', 'xenial'
     group 'root'
     mode 0o644
   end
-when 'bionic'
+when 'bionic', 'focal'
   cookbook_file '/opt/couchdb/etc/local.d/erlang_query_server.ini' do
     source 'erlang_query_server.ini'
     owner 'couchdb'
